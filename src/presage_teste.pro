@@ -1,4 +1,17 @@
-QT -= gui widgets
+PRESAGE_ROOT = $$(PRESAGE_ROOT)
+isEmpty(PRESAGE_ROOT) {
+        win32 {
+                error(Environment variable PRESAGE_ROOT must be set)
+        }
+        unix {
+                PRESAGE_ROOT = /usr
+        }
+}
+! exists($${PRESAGE_ROOT}) {
+        error(PRESAGE_ROOT does not exist. Please set environment variable PRESAGE_ROOT to a valid presage installation.)
+}
+
+QT += gui widgets qml
 
 CONFIG += c++11 console
 CONFIG -= app_bundle
@@ -24,6 +37,7 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 
 
 unix:!macx: LIBS += -lpresage -L/usr/lib -L/usr/bin
-INCLUDEPATH   =  /usr/local/include/ \
+INCLUDEPATH   =  $${PRESAGE_ROOT}/include/x86_64-linux-gnu/qt5 \
+                /usr/local/include/ \
                 /usr/include/ \
                 /usr/bin
