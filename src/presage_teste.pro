@@ -14,7 +14,7 @@ isEmpty(PRESAGE_ROOT) {
 QT += gui widgets qml
 
 CONFIG += c++11 console
-CONFIG -= app_bundle
+#CONFIG -= app_bundle
 
 # The following define makes your compiler emit warnings if you use
 # any Qt feature that has been marked deprecated (the exact warnings
@@ -37,7 +37,7 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 
 
 unix:!macx: LIBS += -lpresage -L/usr/lib -L/usr/bin
-INCLUDEPATH   =  $${PRESAGE_ROOT}/include/x86_64-linux-gnu/qt5 \
+INCLUDEPATH   = $${PRESAGE_ROOT}/include/x86_64-linux-gnu/qt5 \
                 /usr/local/include/ \
                 /usr/include/ \
                 /usr/bin

@@ -27,33 +27,30 @@ private:
 //int main(int argc, char** argv)
 
 
-int main(int argc, char*argv[])
+int main(int argc, char** argv)
 {
-    QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
-    QGuiApplication app(argc, argv);
+    //QGuiApplication app(argc, argv);
 
     std::string context;
     ExampleCallback callback(context);
-    QString dbPath="/home/candy/Documentos/presage_teste/portugues/presage_portuguese.xml";
-    Presage *presage= new Presage(&callback);//, std::string(dbPath.toUtf8().constData()));
+    Presage presage(&callback);
 
     std::string buffer;
     std::vector< std::string > predictions;
     for (;;) {
         // prompt user and append line into context buffer
-        std::cout<< "> ";
+        std::cout << "> ";
         getline(std::cin, buffer);
         context += buffer;
         std::cout<<"context "<<context<<"\n";
         // request prediction
-        predictions = presage->predict();
+        predictions = presage.predict ();
         // print predictions
         std::cout<<"prediction size: "<<predictions.size()<<"\n";
         for (int i = 0; i < predictions.size(); i++) {
-            std::cout << predictions[i] << std::endl;
+            std::cout << i << ": " << predictions[i] << std::endl;
         }
     }
-
-    //return 0;
-    return app.exec();
+    return 0;
+    //return app.exec();
 }
